@@ -1,14 +1,25 @@
+'use strict'
+
 const assert = require('assert');
 const User   = require('../src/user');
 
 describe('Reading users out of the database', () => {
-  beforeEach(() => {
-    joe = new User({ name: 'Joe'});
+  let joe;
+
+  beforeEach((done) => {
+    joe = new User({ name: 'Joe' });
     joe.save()
       .then(() => done());
   });
 
-  it('finds all users with a name of joe', () => {
+  it('finds all users with a name of joe', (done) => {
+    User.find({ name: 'Joe' })
+      .then((users) => {
+        const foundId    = users[0]._id.toString();
+        const insertedId = joe._id.toString();
 
+        assert( foundId === insertedId );
+        done();
+      });
   })
 });

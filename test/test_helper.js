@@ -1,3 +1,4 @@
+'use strict'
 const mongoose = require('mongoose');
 // global.Promise EH A IMPLEMENTACAO NATIVA DO NODE
 // PARA PROMISES
