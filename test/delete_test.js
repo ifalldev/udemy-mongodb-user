@@ -11,40 +11,29 @@ describe('Deleting a user', () => {
       .then(() => done());
   });
 
-  it('model instance remove', (done) => {
-    joe.remove()
+  function assertName(operation, done) {
+    operation
       .then(() => User.findOne({ name: 'Joe' }))
       .then(user => {
         assert(!user);
         done();
       });
+  }
+
+  it('model instance remove', (done) => {
+    assertName(joe.remove(),done);
   });
 
   it('model mothod remove', done => {
     // REMOVE A BUNCH OF RECORS WITH SOME GIVEM CRITERIA
-    User.remove({ name: 'Joe' })
-      .then(() => User.findOne({ name: 'Joe' }))
-      .then(user => {
-        assert(!user);
-        done();
-      });
+    assertName(User.remove({ name: 'Joe' }), done);
   });
 
   it('model mothod findOneAndRemove', done => {
-    User.findOneAndRemove({ name: 'Joe' })
-    .then(() => User.findOne({ name: 'Joe' }))
-    .then(user => {
-      assert(!user);
-      done();
-    });
+    assertName(User.findOneAndRemove({ name: 'Joe' }), done);
   });
 
   it('model mothod findByIdAndRemove', done => {
-    User.findByIdAndRemove(joe._id)
-    .then(() => User.findOne({ name: 'Joe' }))
-    .then(user => {
-      assert(!user);
-      done();
-    });
+    assertName(User.findByIdAndRemove(joe._id), done);
   });
 })
