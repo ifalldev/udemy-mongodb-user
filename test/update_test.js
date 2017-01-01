@@ -7,7 +7,7 @@ describe('Updating records', () => {
   let joe;
 
   beforeEach(done => {
-    joe = new User({ name: 'Joe', postCount: 1 });
+    joe = new User({ name: 'Joe', likes: 1 });
     joe.save()
       .then(() => done());
   });
@@ -52,14 +52,14 @@ describe('Updating records', () => {
       done
     );
   });
-  // XIT IS NOT TESTED
-  xit('A user can have their post count incremented by 1', done => {
-    User.update({ name: 'Joe' }, { $inc: { postCount: 1 } } )
+  // XIT(INSTEAD OF IT) TO NOT TEST IT
+  it('A user can have their post count incremented by 1', done => {
+    User.update({ name: 'Joe' }, { $inc: { likes: 1 } } )
       .then(() => {
         return User.findOne({ name: 'Joe' });
       })
       .then(user => {
-        assert(user.postCount === 2);
+        assert(user.likes === 2);
         done();
       });
   });

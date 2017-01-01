@@ -14,8 +14,13 @@ before(() => {
 });
 // HOOK
 beforeEach(done => {
-  mongoose.connection.collections.users.drop(() => {
-    // CALLBACK
-    done();
+  const { users, comments, blogposts } = mongoose.connection.collections;
+
+  users.drop(() => {
+    comments.drop(() => {
+      blogposts.drop(() => {
+        done();
+      })
+    })
   });
 });
