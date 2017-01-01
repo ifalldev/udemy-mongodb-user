@@ -52,8 +52,8 @@ describe('Updating records', () => {
       done
     );
   });
-
-  it('A user can have their post count incremented by 1', done => {
+  // XIT IS NOT TESTED
+  xit('A user can have their post count incremented by 1', done => {
     User.update({ name: 'Joe' }, { $inc: { postCount: 1 } } )
       .then(() => {
         return User.findOne({ name: 'Joe' });
